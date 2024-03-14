@@ -1,0 +1,8 @@
+
+
+__pycache__/
+.idea
+*.zip
+pcc_3e-main
+venv
+learning_log
