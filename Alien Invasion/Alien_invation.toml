@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Alien Invasion"
+version = "1.0.0"
+authors = [
+    { name="Stewart Magnus", email="stewartmagnus2001@gmail.com" },
+]
+description = "A fun game for all ages."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT Licence",
+        "Operating System :: OS Independent",
+]
+[project.urls]
+"Homepage" = "https://github.com/ste-wart/python-crash-course"
+"Bug Tracker" = "https://github.com/ste-wart/python-crash-course/issues"

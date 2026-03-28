@@ -1,15 +1,15 @@
 import matplotlib.pyplot as plt
 
-values = [1, 2, 3, 4, 5, 6, 7]
-squares = [1, 4, 9, 16, 25, 36, 49]
-
-x_values = range(1, 1001)
+x_values = range(1, 51)
 y_values = [x**2 for x in x_values]
+z = [i for i in range(1, 2501, 50)]
 
 
-plt.style.use('ggplot')
+
+plt.style.use('bmh')
 fig, ax = plt.subplots()
-ax.scatter(values, squares, linewidth=3)
+ax.scatter(x_values, y_values, s=10)
+ax.scatter(x_values, z, s=10)
 
 # Set chart title and label axes
 ax.set_title("Square Numbers", fontsize=24)

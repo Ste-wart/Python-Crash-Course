@@ -28,6 +28,13 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
+        # Display Backgroung
+        self.bg_image_load = pygame.image.load("../images/Background/gpt1.png")
+        self.bg_image = pygame.transform.scale(
+            self.bg_image_load,
+            (self.settings.screen_width, self.settings.screen_height)
+        )
+
         pygame.display.set_caption('Alien Invasion')
 
         # Create an instance to store game statistics and a scoreboard
@@ -44,6 +51,11 @@ class AlienInvasion:
 
         # Make the Play button.
         self.play_button = Button(self, "Play")
+
+        # Game sounds.
+        self.exp_sound = pygame.mixer.Sound('../sounds/explosion.wav')
+        self.n_level_sound = pygame.mixer.Sound('../sounds/new_level.wav')
+        pygame.mixer.music.load('../sounds/As It Was.mp3')
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -74,7 +86,7 @@ class AlienInvasion:
                 self._check_play_button(mouse_pos)
 
     def _check_play_button(self, button_clicked):
-        """Start a new game when the player clicks Play or presses the Return key."""
+        """Start a new game when the player clicks Play or presses the Space or Return key."""
 
         if (button_clicked or 'Play') and not self.game_active:
             # Reset the game settings.
@@ -95,10 +107,13 @@ class AlienInvasion:
 
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
+            pygame.mixer.music.play(-1, 0)
 
     def _check_keydown_events(self, event):
         """Respond to key presses."""
         if event.key == pygame.K_RETURN:
+            self._check_play_button('Play')
+        elif event.key == pygame.K_SPACE:
             self._check_play_button('Play')
         if event.key == pygame.K_RIGHT:  # Move the ship to the right.
             self.ship.moving_right = True
@@ -143,6 +158,7 @@ class AlienInvasion:
                                                 self.aliens, True, True)
 
         if collisions:
+            self.exp_sound.play()
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
                 self.sb.prep_score()
@@ -156,6 +172,7 @@ class AlienInvasion:
             # Increase level.
             self.stats.level += 1
             self.sb.prep_level()
+            self.n_level_sound.play()
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien."""
@@ -201,7 +218,7 @@ class AlienInvasion:
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         # Redraw the screen during each pass through the loop.
-        self.screen.fill(self.settings.bg_colour)
+        self.screen.blit(self.bg_image, (0, 0))
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
@@ -264,9 +281,3 @@ class AlienInvasion:
             path.write_text(contents)
 
         sys.exit()
-
-
-if __name__ == '__main__':
-    # Make a game instance, and run the game.
-    ai = AlienInvasion()
-    ai.run_game()

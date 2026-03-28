@@ -18,8 +18,8 @@ class Settings:
 
         # Bullet Settings
         self.bullet_allowed = 10
-        self.bullet_width = 3
-        self.bullet_height = 15
+        self.bullet_width = 40
+        self.bullet_height = 30
         self.bullet_color = (60, 80, 60)
 
         # Alien settings
@@ -30,6 +30,7 @@ class Settings:
 
         # How quickly the alien point values increase
         self.score_scale = 1.5
+
 
         self.initialize_dynamic_settings()
 
