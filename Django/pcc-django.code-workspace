@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../pcc_3e-main/chapter_20/styling_learning_log"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.live-server"
+		]
+	},
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Django"
+	}
+}
